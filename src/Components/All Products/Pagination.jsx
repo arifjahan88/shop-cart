@@ -1,5 +1,4 @@
-// eslint-disable-next-line react/prop-types
-export const Pagination = ({ totalproducts, productsperpage, setcurrentpage }) => {
+const Pagination = ({ totalproducts, productsperpage, setcurrentpage }) => {
   let pages = [];
   for (let i = 1; i <= Math.ceil(totalproducts / productsperpage); i++) {
     pages.push(i);
@@ -21,3 +20,5 @@ export const Pagination = ({ totalproducts, productsperpage, setcurrentpage }) =
     </div>
   );
 };
+
+export default Pagination;
