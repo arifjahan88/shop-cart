@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Pagination from "./pagination";
+import Pagination from "./Pagination";
 
 const AllProducts = () => {
   const [data, setData] = useState([]);
