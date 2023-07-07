@@ -1,11 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Pagination } from "./pagination";
 
 const AllProducts = () => {
   const [data, setData] = useState([]);
   const [search, setsearch] = useState("");
-  console.log(search);
-  console.log(data);
+  const [currentpage, setcurrentpage] = useState(1);
+  const [productsperpage, setproductsperpage] = useState(5);
+
+  const indexOfLastProduct = currentpage * productsperpage;
+  const indexOfFirstProduct = indexOfLastProduct - productsperpage;
+
   useEffect(() => {
     axios
       .get("https://api.hiring.masterkey.tech/api/v1/products")
@@ -29,6 +34,7 @@ const AllProducts = () => {
           .filter((item) => {
             return item.product_name.toLowerCase().includes(search.toLowerCase());
           })
+          .slice(indexOfFirstProduct, indexOfLastProduct)
           .map((item) => (
             <div key={item._id} className="border p-2 rounded-lg">
               <img className="mx-auto mb-10" src={item.product_img} alt="" />
@@ -40,6 +46,11 @@ const AllProducts = () => {
             </div>
           ))}
       </div>
+      <Pagination
+        totalproducts={data.length}
+        productsperpage={productsperpage}
+        setcurrentpage={setcurrentpage}
+      />
     </section>
   );
 };
